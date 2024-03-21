@@ -51,7 +51,7 @@ function addCourse(): void {
 */
 function getInfo():void {
     //Hämta element från index.html
-    const codeInput: HTMLElement|null = document.getElementById('courseCode') ;
+    const codeInput: HTMLElement|null = document.getElementById('courseCode') as HTMLInputElement | null;
     const nameInput: HTMLElement|null = document.getElementById('courseName');
     const progInput: HTMLElement|null = document.getElementById('courseProg');
     const urlInput: HTMLElement|null = document.getElementById('courseUrl');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeScript | Moment 1.2</title>
-    <script src="./js/main.ts"></script>
+    <script src="./js/test.ts"></script>
 </head>
 <body>
     <header>
@@ -12,21 +12,23 @@
         <h2>Moment 1.2</h2>
     </header>
     <main>
-        
-            <label for="courseCode">Kurskod:</label>
-            <input type="text" name="courseCode" id="courseCode">
-            <br>
-            <label for="courseName">Kursnamn:</label>
-            <input type="text" name="courseName" id="courseName">
-            <br>
-            <label for="courseProg">Progression:</label>
-            <input type="text" name="courseProg" id="courseProg">
-            <br>   
-            <label for="courseUrl">URL till kursplan:</label>
-            <input type="url" name="courseUrl" id="courseUrl">
-            <br>
-            <button type="submit" id="addBtn">Lägg till</button>
-        
+        <label for="courseCode">Kurskod:</label>
+        <input type="text" name="courseCode" id="courseCode">
+        <br>
+        <label for="courseName">Kursnamn:</label>
+        <input type="text" name="courseName" id="courseName">
+        <br>
+        <label for="courseProg">Progression:</label>
+        <input type="text" name="courseProg" id="courseProg">
+        <br>   
+        <label for="courseUrl">URL till kursplan:</label>
+        <input type="url" name="courseUrl" id="courseUrl">
+        <br>
+        <button type="submit" id="addBtn">Lägg till</button>
+
+        <div id="error">
+
+        </div>
 
         <table>
             <thead>
@@ -35,6 +37,9 @@
                 <th>Progression</th>
                 <th>Kursplan</th>
             </thead>
+            <tbody id="tBody">
+    
+            </tbody>
         </table>
     </main>
     <footer>
