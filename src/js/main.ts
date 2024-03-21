@@ -2,21 +2,16 @@
 interface Course {
     code: string;
     name: string;
-    progression: Progression;
+    progression: string;
     syllabus: string;
 }
-// De värden som progression kan ha
-enum Progression {
-    A = 1,
-    B,
-    C
-}
+
 
 window.onload = () => init();
 
 function init(): void {
     
-    const addBtn: HTMLElement|null = document.getElementById('addBtn');
+    const addBtn = document.getElementById('addBtn') as HTMLButtonElement;
 
     // Eventlyssnare på knapp
     addBtn.addEventListener('click', () => {
@@ -24,13 +19,26 @@ function init(): void {
     })
 
 };
-/*
-function addCourse(): void {
-    //Hämta element från index.HTML
-    const codeInput: HTMLElement|null = document.getElementById('courseCode') ;
-    const nameInput: HTMLElement|null = document.getElementById('courseName');
-    const progInput: HTMLElement|null = document.getElementById('courseProg');
-    const urlInput: HTMLElement|null = document.getElementById('courseUrl');
+
+function getInfo():void {
+    //Hämta element från index.html
+    const codeInput = document.getElementById('courseCode') as HTMLInputElement;
+    const nameInput = document.getElementById('courseName') as HTMLInputElement;
+    const progInput = document.getElementById('courseProg') as HTMLInputElement;
+    const urlInput = document.getElementById('courseUrl') as HTMLInputElement;
+
+    let newCourse: Course = {
+        code: codeInput.value,
+        name: nameInput.value,
+        progression: progInput.value,
+        syllabus: urlInput.value
+    };
+    
+    addCourse(newCourse);
+    storeCourse(newCourse);
+};
+
+function addCourse(course:any):void {
     const tBody: HTMLElement|null = document.getElementById('tBody');
 
     // Skapa table-rad
@@ -38,37 +46,32 @@ function addCourse(): void {
 
     // Skapa td med kurskod
     const codeTd: HTMLTableCellElement = document.createElement('td');
-    let codeText = document.createTextNode(codeInput.value);
+    let codeText = document.createTextNode(course.code);
     codeTd.appendChild(codeText);
+    // Skapa td med kursnamn
+    const nameTd: HTMLTableCellElement = document.createElement('td');
+    let nameText = document.createTextNode(course.name);
+    nameTd.appendChild(nameText);
+    // Skapa td med progression
+    const progTd: HTMLTableCellElement = document.createElement('td');
+    let progText = document.createTextNode(course.progression);
+    progTd.appendChild(progText);
+    // Skapa td med URL
+    const urlTd: HTMLTableCellElement = document.createElement('td');
+    let urlText = document.createTextNode(course.syllabus);
+    urlTd.appendChild(urlText);
 
 
     // Lägg till celler i tr
     trEl.appendChild(codeTd);
+    trEl.appendChild(nameTd);
+    trEl.appendChild(progTd);
+    trEl.appendChild(urlTd);
 
     // Lägg till tr i tbody
     tBody?.appendChild(trEl);
 }
-*/
-function getInfo():void {
-    //Hämta element från index.html
-    const codeInput: HTMLElement|null = document.getElementById('courseCode') as HTMLInputElement | null;
-    const nameInput: HTMLElement|null = document.getElementById('courseName');
-    const progInput: HTMLElement|null = document.getElementById('courseProg');
-    const urlInput: HTMLElement|null = document.getElementById('courseUrl');
-    const tBody: HTMLElement|null = document.getElementById('tBody');
 
-    if(progInput.value === 'A' || progInput.value === 'B' || progInput.value === 'C') {
-        let course: Course = {
-            code: codeInput.value,
-            name: nameInput.value,
-            progression: progInput.value,
-            syllabus: urlInput.value
-        }
+function storeCourse(course:object):void {
 
-        console.log(course);
-    } else {
-        let errorDiv: HTMLDivElement | null = document.getElementById('error');
-        errorDiv.innerHTML = '<p>Progressionen måste vara A, B eller C.'
-    }
-    
 };
