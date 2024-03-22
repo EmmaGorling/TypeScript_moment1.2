@@ -20,6 +20,7 @@ function init(): void {
 
 };
 
+// Hämta från inputs
 function getInfo():void {
     //Hämta element från index.html
     const codeInput = document.getElementById('courseCode') as HTMLInputElement;
@@ -35,10 +36,10 @@ function getInfo():void {
     };
     
     addCourse(newCourse);
-    storeCourse(newCourse);
 };
 
 function addCourse(course:any):void {
+    /*
     const tBody: HTMLElement|null = document.getElementById('tBody');
 
     // Skapa table-rad
@@ -60,7 +61,7 @@ function addCourse(course:any):void {
     const urlTd: HTMLTableCellElement = document.createElement('td');
     let urlText = document.createTextNode(course.syllabus);
     urlTd.appendChild(urlText);
-
+    
 
     // Lägg till celler i tr
     trEl.appendChild(codeTd);
@@ -70,8 +71,13 @@ function addCourse(course:any):void {
 
     // Lägg till tr i tbody
     tBody?.appendChild(trEl);
+    */
+
+    let courseList:any = [];
+
+    courseList.push(course);
+
+    console.log(courseList);
+
 }
 
-function storeCourse(course:object):void {
-
-};
