@@ -131,7 +131,7 @@ function editCourse(article:HTMLElement, course:courseInfo):void {
 
     // Uppdatera innehåll i article
     article.innerHTML = `
-    <h3>${editedCourse.name}</h3>
+        <h3>${editedCourse.name}</h3>
         <p>Kurskod: ${editedCourse.code}</p>
         <p>Progression: ${editedCourse.progression}</p>
         <a href='${editedCourse.syllabus}' target='_blank'>Kursplan för ${editedCourse.name}</a>

@@ -1,0 +1,13 @@
+// Färger
+$dark-blue: #031C38;
+$pink: #FD26C0;
+$blue: #102946;
+
+// Centrera
+$center: 0 auto;
+
+// Padding header & footer
+@mixin header_footer {
+    padding: 30px 0px;
+    text-align: center;
+}
