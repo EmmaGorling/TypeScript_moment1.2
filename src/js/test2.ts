@@ -1,9 +1,11 @@
-//Hämta element från index.html
+//Hämta input-element från index.html
 const codeInput = document.getElementById('courseCode') as HTMLInputElement;
 const nameInput = document.getElementById('courseName') as HTMLInputElement;
 const progInput = document.getElementById('courseProg') as HTMLInputElement;
 const syllInput = document.getElementById('courseSyll') as HTMLInputElement;
 
+// Hämta div för utskrift
+let coursesDiv = document.getElementById('courses') as HTMLDivElement;
 
 // Inteface för ny kurs
 interface courseInfo {
@@ -19,11 +21,16 @@ let courseArr: any[] = [];
 window.onload = init;
 
 function init():void {
-    // Lägga till knapp
+    // Lägga till -knapp
     const addBtn = document.getElementById('addBtn') as HTMLButtonElement;
     addBtn?.addEventListener('click', () => {
         getInput();
     });
+    // Rensa -knapp
+    const clearBtn =document.getElementById('clearBtn');
+    clearBtn?.addEventListener('click', () => {
+        clearCourses();
+    })
 
     loadCourses();
 }
@@ -52,9 +59,7 @@ function getInput(): void {
 }
 
 function writeCourse(course:any):void {
-    // Hämta div för utskrift
-    let coursesDiv = document.getElementById('courses') as HTMLDivElement;
-
+    
     coursesDiv.innerHTML += `
     <article>
         <h3>${course.name}</h3>
@@ -71,6 +76,7 @@ function storeCourses(courses): void {
     localStorage.setItem('courseList', jsonStr);
 };
 
+// LAdda local Storage
 function loadCourses(): void {
     const storedCourses = localStorage.getItem('courseList');
     if (storedCourses) {
@@ -80,4 +86,11 @@ function loadCourses(): void {
             writeCourse(course);
         });
     }
-}
+};
+
+// Rensa localStorage
+function clearCourses():void {
+    coursesDiv.innerHTML = '';
+    localStorage.clear();
+    courseArr = [];
+};
