@@ -24,6 +24,8 @@ function init():void {
     addBtn?.addEventListener('click', () => {
         getInput();
     });
+
+    loadCourses();
 }
 
 // Hämta input
@@ -35,11 +37,18 @@ function getInput(): void {
         progression: progInput.value,
         syllabus: syllInput.value
     };
+    // Kontrollera om kurskoden redan finns i arrayen
+    const codeExists = courseArr.some(course => course.code === newCourse.code);
+    if (codeExists) {
+        alert("Kurskoden finns redan i listan.");
+        return; // Avbryt funktionen om kurskoden redan finns
+    }
 
     // Lägg till i array
     courseArr.push(newCourse);
 
     writeCourse(newCourse);
+    storeCourses(courseArr);
 }
 
 function writeCourse(course:any):void {
@@ -55,3 +64,20 @@ function writeCourse(course:any):void {
     </article>`;
     
 };
+
+function storeCourses(courses): void {
+    const jsonStr = JSON.stringify(courses);
+
+    localStorage.setItem('courseList', jsonStr);
+};
+
+function loadCourses(): void {
+    const storedCourses = localStorage.getItem('courseList');
+    if (storedCourses) {
+        courseArr = JSON.parse(storedCourses);
+        // Loopa genom varje sparad kurs och skriv ut den
+        courseArr.forEach(course => {
+            writeCourse(course);
+        });
+    }
+}
