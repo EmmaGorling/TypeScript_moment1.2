@@ -64,15 +64,27 @@ function writeCourse(course:any):void {
     codeInput.value = '';
     nameInput.value = '';
     syllInput.value = '';
+
+    // Article-element
+    const article = document.createElement('article');
     
-    // Lägg till i coursesDiv
-    coursesDiv.innerHTML += `
-    <article>
+    // Lägg till i article
+    article.innerHTML = `
         <h3>${course.name}</h3>
         <p>Kurskod: ${course.code}</p>
         <p>Progression: ${course.progression}</p>
         <a href='${course.syllabus}' target='_blank'>Kursplan för ${course.name}</a>
-    </article>`;
+        <button type='submit' class='editBtn'><i class="fa-solid fa-pen-to-square"></i></button
+        `;
+
+    //Lägg till article till div
+    coursesDiv.appendChild(article);
+
+    // Redigera - knapp
+    const editBtn = article.querySelector('.editBtn') as HTMLButtonElement;
+    editBtn.addEventListener('click', () => {
+        editCourse(article, course);
+    })
     
 };
 
@@ -99,4 +111,36 @@ function clearCourses():void {
     coursesDiv.innerHTML = '';
     localStorage.clear();
     courseArr = [];
+};
+
+function editCourse(article:HTMLElement, course:courseInfo):void {
+
+    // Prompt för att ändra kursen
+    const editedCourse: courseInfo = {
+        code: prompt('Ny kurskod:', course.code) || course.code,
+        name: prompt('Nytt kursnamn:', course.name) || course.name,
+        progression: prompt('Ny progression', course.progression) || course.progression,
+        syllabus: prompt('Ny kursplan', course.syllabus) || course.syllabus
+    };
+
+    // Uppdatera innehåll i article
+    article.innerHTML = `
+    <h3>${editedCourse.name}</h3>
+        <p>Kurskod: ${editedCourse.code}</p>
+        <p>Progression: ${editedCourse.progression}</p>
+        <a href='${editedCourse.syllabus}' target='_blank'>Kursplan för ${editedCourse.name}</a>
+        <button type='submit' class='editBtn'><i class="fa-solid fa-pen-to-square"></i></button>
+    `;
+    // Redigera - knapp OBS! För att kunna redigera flera gånger
+    const editBtn = article.querySelector('.editBtn') as HTMLButtonElement;
+    editBtn.addEventListener('click', () => {
+        editCourse(article, editedCourse);
+    });
+
+    // Uppdatera kursinformationen i array
+    const index: number = courseArr.findIndex(c => c.code === course.code);
+    courseArr[index] = editedCourse;
+
+    // Spara ändringarna
+    storeCourses(courseArr);
 };
