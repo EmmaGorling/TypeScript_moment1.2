@@ -59,13 +59,19 @@ function getInput(): void {
 }
 
 function writeCourse(course:any):void {
+
+    // Rensa input-fält
+    codeInput.value = '';
+    nameInput.value = '';
+    syllInput.value = '';
     
+    // Lägg till i coursesDiv
     coursesDiv.innerHTML += `
     <article>
         <h3>${course.name}</h3>
         <p>Kurskod: ${course.code}</p>
         <p>Progression: ${course.progression}</p>
-        <p>Kursplan: ${course.syllabys}</p>
+        <a href='${course.syllabus}' target='_blank'>Kursplan för ${course.name}</a>
     </article>`;
     
 };
