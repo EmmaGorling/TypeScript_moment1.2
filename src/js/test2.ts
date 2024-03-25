@@ -9,10 +9,10 @@ let coursesDiv = document.getElementById('courses') as HTMLDivElement;
 
 // Inteface för ny kurs
 interface courseInfo {
-    code: any
-    name: any
-    progression: any
-    syllabus: any
+    code: string;
+    name: string;
+    progression: string;
+    syllabus: string;
 }
 
 let courseArr: any[] = [];
